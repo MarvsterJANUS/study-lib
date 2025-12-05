@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study-Lib</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Study Materials Library</h1>
+                <p class="subtitle">Access all your learning materials in one place</p>
+            </div>
+            <label class="theme-toggle">
+                <input type="checkbox" id="themeToggle">
+                <span class="toggle-slider">
+                    <img src="assets/icons/dark-mode.png" alt="Dark Mode" class="toggle-icon light-icon">
+                    <img src="assets/icons/light-mode.png" alt="Light Mode" class="toggle-icon dark-icon">
+                </span>
+            </label>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search for documents..." class="search-box">
+            <div class="filter-buttons" id="categoryFilters">
+                <button class="filter-btn active" data-category="all">All</button>
+            </div>
+        </div>
+
+        <div class="pdf-grid" id="pdfGrid">
+            <!-- PDF cards will be generated here -->
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <p>No documents found</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Study Library | Made by MD</p>
+        </div>
+    </footer>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">PDF Viewer</h2>
+                <div class="modal-actions">
+                    <button class="modal-open-new" id="openNewTab">Open in New Tab</button>
+                    <button class="modal-close" id="closeModal">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="library-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
