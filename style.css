@@ -11,22 +11,22 @@
     --text-primary: #1a1a1a;
     --text-secondary: #6b7280;
     --border-color: #e5e7eb;
-    --accent: #10b981;
-    --accent-hover: #059669;
-    --accent-light: rgba(16, 185, 129, 0.1);
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --accent-light: rgba(139, 92, 246, 0.1);
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="dark"] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-card: #1e293b;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --border-color: #334155;
-    --accent: #34d399;
-    --accent-hover: #10b981;
-    --accent-light: rgba(52, 211, 153, 0.1);
+    --bg-primary: #1c1c1e;
+    --bg-secondary: #141416;
+    --bg-card: #2c2c2e;
+    --text-primary: #f2f3f5;
+    --text-secondary: #b5bac1;
+    --border-color: #3a3a3c;
+    --accent: #a78bfa;
+    --accent-hover: #8b5cf6;
+    --accent-light: rgba(167, 139, 250, 0.15);
     --shadow: rgba(0, 0, 0, 0.3);
 }
 
@@ -166,13 +166,71 @@ main {
     padding: 3rem 0;
 }
 
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--accent-light) 0%, transparent 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 /* Controls */
 .controls {
     margin-bottom: 2rem;
 }
 
+.controls-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .search-box {
-    width: 100%;
+    flex: 1;
     padding: 1rem 1.5rem;
     font-size: 1rem;
     border: 1px solid var(--border-color);
@@ -180,13 +238,44 @@ main {
     background: var(--bg-card);
     color: var(--text-primary);
     transition: all 0.3s ease;
-    margin-bottom: 1rem;
 }
 
 .search-box:focus {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.view-options {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.25rem;
+}
+
+.view-btn {
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-btn:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.view-btn.active {
+    background: var(--accent);
+    color: white;
 }
 
 /* Filter Buttons */
@@ -227,6 +316,17 @@ main {
     margin-bottom: 2rem;
 }
 
+/* Grid Layout Variations */
+.pdf-grid.comfortable {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.pdf-grid.compact {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
 /* PDF Card */
 .pdf-card {
     background: var(--bg-card);
@@ -235,6 +335,9 @@ main {
     padding: 1.5rem;
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .pdf-card:hover {
@@ -261,6 +364,7 @@ main {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
+    flex-shrink: 0;
 }
 
 .pdf-card .category {
@@ -272,6 +376,8 @@ main {
     font-size: 0.85rem;
     margin-bottom: 0.75rem;
     font-weight: 500;
+    flex-shrink: 0;
+    align-self: flex-start;
 }
 
 .pdf-card .description {
@@ -279,15 +385,23 @@ main {
     font-size: 0.95rem;
     margin-bottom: 1rem;
     line-height: 1.5;
+    flex-grow: 1;
+    min-height: 4.5rem;
 }
 
 .pdf-card .meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     font-size: 0.85rem;
     color: var(--text-secondary);
     margin-bottom: 1rem;
+}
+
+.pdf-card .meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 .card-actions {
@@ -452,7 +566,42 @@ footer p {
         font-size: 1.5rem;
     }
 
-    .pdf-grid {
+    .hero {
+        padding: 2rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-stats {
+        gap: 2rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .controls-row {
+        flex-direction: column;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .view-options {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pdf-grid,
+    .pdf-grid.comfortable,
+    .pdf-grid.compact {
         grid-template-columns: 1fr;
     }
 

@@ -1,5 +1,6 @@
 // State
 let currentFilter = 'all';
+let currentView = 'compact';
 
 // DOM Elements
 const searchInput = document.getElementById('searchInput');
@@ -12,11 +13,15 @@ const pdfViewer = document.getElementById('pdfViewer');
 const modalTitle = document.getElementById('modalTitle');
 const closeModal = document.getElementById('closeModal');
 const openNewTab = document.getElementById('openNewTab');
+const totalDocs = document.getElementById('totalDocs');
+const totalCategories = document.getElementById('totalCategories');
+const totalSize = document.getElementById('totalSize');
 
 // Initialize
 function init() {
     loadTheme();
     generateCategoryFilters();
+    updateStats();
     renderPDFs();
     setupEventListeners();
 }
@@ -45,6 +50,14 @@ function generateCategoryFilters() {
     `).join('');
 }
 
+// Update statistics
+function updateStats() {
+    totalDocs.textContent = pdfLibrary.length;
+    totalCategories.textContent = new Set(pdfLibrary.map(pdf => pdf.category)).size;
+    const totalBytes = pdfLibrary.reduce((sum, pdf) => sum + (pdf.fileSize || 0), 0);
+    totalSize.textContent = formatFileSize(totalBytes);
+}
+
 // Render PDFs
 function renderPDFs(searchTerm = '') {
     const filteredPDFs = pdfLibrary.filter(pdf => {
@@ -63,6 +76,7 @@ function renderPDFs(searchTerm = '') {
 
     pdfGrid.style.display = 'grid';
     emptyState.style.display = 'none';
+    pdfGrid.className = `pdf-grid ${currentView}`;
 
     pdfGrid.innerHTML = filteredPDFs.map(pdf => `
         <div class="pdf-card">
@@ -72,6 +86,8 @@ function renderPDFs(searchTerm = '') {
             <p class="description">${pdf.description}</p>
             <div class="meta">
                 <span>${formatDate(pdf.date)}</span>
+                ${pdf.author ? `<span>${pdf.author}</span>` : ''}
+                ${pdf.fileSize ? `<span>${formatFileSize(pdf.fileSize)}</span>` : ''}
             </div>
             <div class="card-actions">
                 <button class="view-btn" onclick="viewPDF('${pdf.file}', '${pdf.title}')">
@@ -89,6 +105,15 @@ function renderPDFs(searchTerm = '') {
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// Format file size
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
 }
 
 // View PDF
@@ -140,6 +165,16 @@ function setupEventListeners() {
             currentFilter = e.target.dataset.category;
             renderPDFs(searchInput.value);
         }
+    });
+
+    // View options
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            currentView = e.currentTarget.dataset.view;
+            renderPDFs(searchInput.value);
+        });
     });
 
     // Modal close
