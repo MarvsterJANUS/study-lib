@@ -5,7 +5,7 @@
 }
 
 :root {
-    --bg-primary: #ffffff;
+    --bg-primary: #fff;
     --bg-secondary: #f8f9fa;
     --bg-card: #ffffff;
     --text-primary: #1a1a1a;
@@ -632,3 +632,4 @@ footer p {
         justify-content: space-between;
     }
 }
+
