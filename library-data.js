@@ -28,6 +28,15 @@ const pdfLibrary = [
         author: "MD",
         fileSize: 158720
     },
+    {
+        title: "Verfassungsorgane",
+        category: "GK",
+        description: "Bundeskanzler, Bundespräsident, Bundesverfassungsgericht, Bundesrat",
+        file: "lernzettel/verfassungsorgane.pdf",
+        date: "2026-01-09",
+        author: "MD",
+        fileSize: 2
+    },
     // Add more PDFs here following the same structure:
     // {
     //     title: "Your PDF Title",
