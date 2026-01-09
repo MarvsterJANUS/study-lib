@@ -32,7 +32,7 @@ const pdfLibrary = [
         title: "Verfassungsorgane",
         category: "GK",
         description: "Bundeskanzler, Bundespräsident, Bundesverfassungsgericht, Bundesrat",
-        file: "lernzettel/verfassungsorgane.pdf",
+        file: "lernzettel/Verfassungsorgane.pdf",
         date: "2026-01-09",
         author: "MD",
         fileSize: 2
