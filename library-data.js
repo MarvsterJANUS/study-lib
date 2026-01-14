@@ -35,7 +35,7 @@ const pdfLibrary = [
         file: "lernzettel/Verfassungsorgane.pdf",
         date: "2026-01-09",
         author: "MD",
-        fileSize: 2
+        fileSize: 158720
     },
     // Add more PDFs here following the same structure:
     // {
